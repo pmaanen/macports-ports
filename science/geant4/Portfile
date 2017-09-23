@@ -383,6 +383,18 @@ NOTE: Use 'sudo port select geant4 ${subport}'
             }
         }
 
+        if {${geant.version} >= "10.2"} {
+            variant cxx14 description {Enable c++14 compiler support} {
+                configure.args-append -DGEANT4_BUILD_CXXSTD=14
+            }
+        }
+
+        if {${geant.version} <= "10.1"} {
+            variant cxx11 description {Enable c++11 compiler support} {
+                configure.args-append -DGEANT4_BUILD_CXXSTD=11
+            }
+        }
+
         default_variants-append +gdml
         if {![variant_isset qt5]} {
             default_variants-append +qt
